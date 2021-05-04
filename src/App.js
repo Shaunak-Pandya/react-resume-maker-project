@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
+import { Route, Switch } from 'react-router';
 import './App.css';
 
-function App() {
+import DisplayResume from './components/DisplayResume';
+import ResumeContext from './components/ResumeContext';
+import FormContainer from './FormContainer'
+
+
+
+const App = () => {
+  const [resumeData, SetResumeData] = useState({name:'shaunak'});
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <ResumeContext.Provider value={{resumeData, SetResumeData}}>
+        <Route exact path="/display" component={DisplayResume} />
+        <Route exact path="/" component={FormContainer} />
+        </ResumeContext.Provider>
+      </Switch>
+
     </div>
   );
 }
